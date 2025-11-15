@@ -804,16 +804,95 @@ El sistema mantiene un registro preciso y en tiempo real del estado de disponibi
 
 
 ---
+## Caso de Uso: Gestionar Perfil de Usuario
 
+| Campo            | Descripción                        |
+|------------------|------------------------------------|
+| ID               | UC-11                              |
+| Nombre           | Gestionar Perfil de Usuario        |
+| Actor principal  | Usuario                            |
+| Actores secundarios | Administrador, Sistema Automático |
+| Tipo             | Secundario                         |
+| Prioridad        | Media                              |
+Descripción
+Este caso de uso describe cómo un usuario puede consultar y actualizar la información básica de su perfil dentro de FitCampus: datos personales, información de contacto, contraseña, preferencias de notificación y foto de identificación.
 
+Flujo principal
+1. El Usuario inicia sesión en la aplicación FitCampus.
+2. Selecciona la opción "Mi Perfil".
+3. El Sistema muestra los datos actuales del usuario.
+4. El Usuario selecciona Editar Perfil.
+5. Ingresa los nuevos datos (teléfono, contraseña, foto, notificaciones, etc.).
+6. El Sistema valida la información.
+7. El Sistema guarda los cambios.
+8. El Sistema notifica al usuario que la actualización fue exitosa.
 
+Opcional: El sistema informa al Administrador si hubo cambios sensibles.
 
+Flujo alternativo
+FA-1: Error de Validación → El sistema muestra errores y pide corregirlos.
 
+FA-2: Cambios Críticos → Requieren verificación (por ejemplo, nuevo correo).
 
+Postcondición
+La información personal del usuario queda actualizada y sincronizada con otros módulos del sistema.
 
+Relaciones con otros casos de uso
+markdown
+Copy code
+| Caso relacionado | Relación | Descripción                                                   |
+|------------------|----------|---------------------------------------------------------------|
+| UC-07            | <>       | Puede impactar datos de membresía.                           |
+| UC-02            | <>       | La foto/identidad actualizada se usa en el control de acceso.|
+| UC-08            | <>       | Se usan datos del perfil para notificaciones de clases.      |
 
+---
 
+## Caso de Uso: Gestionar Pagos y Facturacion
 
+| Campo            | Descripción                              |
+|------------------|------------------------------------------|
+| ID               | UC-12                                    |
+| Nombre           | Gestionar Pagos y Facturación            |
+| Actor principal  | Usuario                                  |
+| Actores secundarios | Administrador, Sistema Automático, Pasarela de Pago |
+| Tipo             | Primario / Financiero                    |
+| Prioridad        | Alta                                     |
+Descripción
+Este caso de uso describe cómo un usuario puede pagar su membresía, ver su historial de facturación, registrar pagos y descargar comprobantes.
+
+Flujo principal
+1. El Usuario inicia sesión.
+2. Selecciona "Pagos y Facturación".
+3. El Sistema muestra los pagos pendientes y métodos disponibles.
+4. El Usuario elige un concepto a pagar.
+5. Selecciona método de pago.
+6. El Sistema envía la transacción a la pasarela de pago.
+7. La pasarela confirma la transacción.
+8. El Sistema actualiza la membresía o el estado de pago.
+9. Se genera y envía comprobante al correo.
+10. Se registra el pago en el historial del Administrador.
+
+Flujo alternativo
+FA-1: Pago Rechazado → La membresía queda en Pendiente de Pago.
+
+FA-2: Pago Duplicado → Se cancela o genera saldo a favor.
+
+FA-3: Error Técnico → El sistema guarda la incidencia y notifica al Administrador.
+
+Postcondición
+El usuario queda con su pago registrado y la membresía actualizada.
+
+Relaciones con otros casos de uso
+markdown
+Copy code
+| Caso relacionado | Relación | Descripción                                                         |
+|------------------|----------|---------------------------------------------------------------------|
+| UC-07            | <>       | El pago valida o renueva la membresía.                             |
+| UC-08            | <>       | Las reservas solo se permiten si la membresía está al día.         |
+| UC-09            | <>       | Alimenta los reportes de ingresos y movimientos financieros.  
+
+---
 
 ### 4.2 Glosario
 
